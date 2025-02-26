@@ -1,0 +1,33 @@
+###### Front end Swing #########################################
+ticketsystemclient/target/
+ticketsystemclient/!.mvn/wrapper/maven-wrapper.jar
+ticketsystemclient/!**/src/main/**/target/
+ticketsystemclient/!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+ticketsystemclient/.idea/modules.xml
+ticketsystemclient/.idea/jarRepositories.xml
+ticketsystemclient/.idea/compiler.xml
+ticketsystemclient/.idea/libraries/
+ticketsystemclient/*.iws
+ticketsystemclient/*.iml
+ticketsystemclient/*.ipr
+
+ticketsystemclient/.gitignore modifie
+
+###### Backend Spring #########################################
+
+### IntelliJ IDEA ###
+ticketsystem/.idea
+ticketsystem/*.iws
+ticketsystem/*.iml
+ticketsystem/*.ipr
+
+ticketsystem/HELP.md
+ticketsystem/target/
+ticketsystem/!.mvn/wrapper/maven-wrapper.jar
+ticketsystem/!**/src/main/**/target/
+ticketsystem/!**/src/test/**/target/
+
+ticketsystem/.gitignore modifie
+
