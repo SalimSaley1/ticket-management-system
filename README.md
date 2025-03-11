@@ -179,18 +179,20 @@ services:
   oracle-db:
     image: container-registry.oracle.com/database/express:21.3.0-xe
     container_name: oracle-ticket-db
+    env_file:
+      - ../.env
     ports:
       - "1521:1521"
       - "5500:5500"
     environment:
-      - ORACLE_PWD=password123 # system and sys
+      - ORACLE_PWD=${ORACLE_PASS} # system and sys
       - ORACLE_CHARACTERSET=AL32UTF8
     volumes:
       - oracle-data:/opt/oracle/oradata
       # Script d'initialisation pour créer les utilisateurs et schémas
       - ./init-scripts:/opt/oracle/scripts/startup
     healthcheck:
-      test: ["CMD", "sqlplus", "-L", "sys/password123@//localhost:1521/xepdb1 as sysdba", "@/opt/oracle/scripts/startup/healthcheck.sql"]
+      test: ["CMD", "sqlplus", "-L", "sys/${ORACLE_PWD}//localhost:1521/${DB_SID} as sysdba", "@/opt/oracle/scripts/startup/healthcheck.sql"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -204,21 +206,23 @@ services:
       context: ..
       dockerfile: Dockerfile
     container_name: ticket-app
+    env_file:
+      - ../.env
     ports:
-      - "8089:8089"
+      - "${SERVER_PORT:-8089}:8089"
     depends_on:
       oracle-db:
         condition: service_healthy
     environment:
       # tns format
-      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle-db)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=xepdb1)))
-      - SPRING_DATASOURCE_USERNAME=ticket_user
-      - SPRING_DATASOURCE_PASSWORD=ticket_password
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=oracle.jdbc.driver.OracleDriver
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@
+        (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle-db)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=${DB_SID:-xepdb1})))
+      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=${SPRING_JPA_HIBERNATE_DDL_AUTO}
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=${SPRING_DATASOURCE_DRIVER_CLASS_NAME}
       - SPRING_JPA_SHOW_SQL=true
-      - SERVER_PORT=8089
-      - JWT_SECRET=salimsaleysalimsaleysalimsaleysalimsaleysalimsaleysalimsaleysalimsaleysalimsaleysalimsaley
+      - JWT_SECRET=${JWT_SECRET}
       - LOGGING_LEVEL_ROOT=INFO
       - LOGGING_LEVEL_COM_HAHN_TICKETSYSTEM=DEBUG
     networks:
