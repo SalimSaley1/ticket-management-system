@@ -1,5 +1,4 @@
 -- healthcheck.sql
--- Script à placer à la racine du projet
 
 WHENEVER SQLERROR EXIT SQL.SQLCODE;
 BEGIN

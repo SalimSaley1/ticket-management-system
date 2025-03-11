@@ -15,7 +15,7 @@ ticketsystemclient/*.ipr
 
 ticketsystemclient/.gitignore modifie
 
-###### Backend Spring #########################################
+###### Backend Spring Boot #########################################
 
 ### IntelliJ IDEA ###
 ticketsystem/.idea
@@ -23,11 +23,25 @@ ticketsystem/*.iws
 ticketsystem/*.iml
 ticketsystem/*.ipr
 
+ticketsystem/.env
+ticketsystem/*.env
+ticketsystem/!.env.example
+
+# Application properties with secrets
+ticketsystem/**/src/main/resources/application.properties
+ticketsystem/!**/src/main/resources/application.properties
+
+# Logs
+ticketsystem/logs/
+ticketsystem/*.log
+
 ticketsystem/HELP.md
-ticketsystem/target/
+#ticketsystem/target/
 ticketsystem/!.mvn/wrapper/maven-wrapper.jar
-ticketsystem/!**/src/main/**/target/
+#ticketsystem/!**/src/main/**/target/
 ticketsystem/!**/src/test/**/target/
 
 ticketsystem/.gitignore modifie
+
+ORIGINAL README.md
 
