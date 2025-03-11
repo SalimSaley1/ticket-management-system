@@ -5,6 +5,8 @@ services:
   oracle-db:
     image: container-registry.oracle.com/database/express:21.3.0-xe
     container_name: oracle-ticket-db
+    env_file:
+      - ../.env
     ports:
       - "1521:1521"
       - "5500:5500"
@@ -30,6 +32,8 @@ services:
       context: ..
       dockerfile: Dockerfile
     container_name: ticket-app
+    env_file:
+      - ../.env
     ports:
       - "${SERVER_PORT:-8089}:8089"
     depends_on:

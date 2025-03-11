@@ -14,7 +14,7 @@ Ce système de gestion de tickets permet aux employés de signaler et de suivre 
 
 ## Technologies utilisées
 
-- **Backend:** Java 17, Spring Boot, API RESTful avec Swagger/OpenAPI
+- **Backend:** Java 17, Spring Boot <!--, API RESTful avec Swagger/OpenAPI  -->
 - **Base de données:** Oracle SQL (21c XE)
 - **Interface utilisateur:** Java Swing avec MigLayout
 - **Déploiement:** Docker, JAR exécutable
@@ -41,8 +41,8 @@ ticket-management-system/
 ## Prérequis
 
 - Docker et Docker Compose
-- JDK 17 ou supérieur (pour le développement)
-- Maven (pour le développement)
+- JDK 17 ou supérieur (uniquement pour le développement)
+- Maven (uniquement pour le développement)
 
 ## Gestion des variables d'environnement
 
@@ -124,6 +124,7 @@ cd ticketsystem
 2. **Démarrer l'application avec Docker Compose**
 
 ```bash
+mvn clean install -DskipTests 
 cd deployment-files
 docker-compose up -d
 ```
