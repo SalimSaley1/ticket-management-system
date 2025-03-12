@@ -44,47 +44,6 @@ ticket-management-system/
 - JDK 17 ou supérieur (uniquement pour le développement)
 - Maven (uniquement pour le développement)
 
-## Gestion des variables d'environnement
-
-Pour assurer la sécurité des informations sensibles, ce projet utilise les bonnes pratiques suivantes pour la gestion des variables d'environnement :
-
-### 1. Fichier .env pour Docker
-
-- Un fichier `.env.example` est fourni comme modèle (commité dans le dépôt)
-- Pour l'utilisation, créez une copie nommée `.env` et personnalisez-la (ce fichier ne doit pas être commité)
-
-Exemple de `.env.example` :
-```
-# Database
-DB_USERNAME=ticket_system
-DB_PASSWORD=example_password
-DB_SID=XE
-
-# Application
-JWT_SECRET=your_jwt_secret_here
-SERVER_PORT=8080
-```
-
-### 2. Fichier .gitignore
-
-Les fichiers contenant des informations sensibles sont exclus du dépôt via `.gitignore` :
-```
-# Environment variables
-.env
-*.env
-!.env.example
-
-# Application properties with secrets
-**/src/main/resources/application-*.properties
-**/src/main/resources/application-*.yml
-!**/src/main/resources/application.yml
-!**/src/main/resources/application-example.yml
-
-# Logs
-logs/
-*.log
-```
-
 ## Installation et démarrage
 
 ### Utilisation avec Docker
